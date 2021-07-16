@@ -1,5 +1,18 @@
-function hello() {
-  console.log("Hello");
+export function calcReimbursment(set: Project[]): number {
+  return 0;
 }
 
-hello();
+type Project = {
+  /**
+   * Whether the city is high (true) or low (false) cost
+   */
+  cityCost: boolean;
+  /**
+   * Date the project begins in month/day/year format
+   */
+  startDate: string;
+  /**
+   * Date the project end in month/day/year format
+   */
+  endDate: string;
+};
