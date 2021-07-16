@@ -10,10 +10,12 @@ Given a set of _projects_, calculate the reimbursement amount for the _set_.
 
 - First and last days of projects/sets are _travel_ days
 - Middle days are _full_ days
+- Gap days should not be billed
 - Days on the ends of gaps between projects are _travel_ days
 - Projects that touch or overlap days are _full_ days
 - Days are only ever counted once
 - Projects are in either high or low cost cities
+- Days should be counted to maximize reimbursement total
 
 ## Rates
 
