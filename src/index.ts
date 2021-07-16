@@ -33,22 +33,11 @@ export function calcReimbursment(projects: ProjectData[]): number {
 
   // Go back through and compare each array for overlaps in projects, take the higher cost full-day rate
   allDaysWorked.forEach((day) => {
-    let isLowCostTravelDay = false;
-    let isHighCostTravelDay = false;
-    let isLowCostFullDay = false;
-    let isHighCostFullDay = false;
-    if (lowCostTravel.includes(day)) {
-      isLowCostTravelDay = true;
-    }
-    if (highCostTravel.includes(day)) {
-      isHighCostTravelDay = true;
-    }
-    if (highCostFull.includes(day)) {
-      isHighCostFullDay = true;
-    }
-    if (lowCostFull.includes(day)) {
-      isLowCostFullDay = true;
-    }
+    // each of these variables will be used to store bool and count value
+    const isLowCostTravelDay = countOf(lowCostTravel, day);
+    const isHighCostTravelDay = countOf(highCostTravel, day);
+    const isLowCostFullDay = countOf(lowCostFull, day);
+    const isHighCostFullDay = countOf(highCostFull, day);
   });
   // Print Values for debugging
   console.log("------ High Cost Travel ------");
@@ -83,4 +72,9 @@ function removeFrom(array: any[], item: any): void {
   if (index > -1) {
     array.splice(index, 1);
   }
+}
+
+// Helper function to count items in array
+function countOf(array: any[], item: any): number {
+  return array.filter((x) => x === item).length;
 }
