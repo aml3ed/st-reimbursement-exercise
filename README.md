@@ -35,3 +35,88 @@ Project: {
 ```
 Set: Projects[]
 ```
+
+## Sets
+
+### Set 1
+
+```
+[
+    {
+        cityCost: false,
+        startDate: 9/1/15,
+        endDate: 9/3/15
+    }
+]
+```
+
+### Set 2
+
+```
+[
+    {
+        cityCost: false,
+        startDate: 9/1/15,
+        endDate: 9/1/15
+    },
+    {
+        cityCost: true,
+        startDate: 9/2/15,
+        endDate: 9/6/15
+    },
+    {
+        cityCost: false,
+        startDate: 9/6/15,
+        endDate: 9/8/15
+    }
+]
+```
+
+### Set 3
+
+```
+[
+    {
+        cityCost: false,
+        startDate: 9/1/15,
+        endDate: 9/3/15
+    },
+    {
+        cityCost: true,
+        startDate: 9/5/15,
+        endDate: 9/7/15
+    },
+    {
+        cityCost: true,
+        startDate: 9/8/15,
+        endDate: 9/8/15
+    }
+]
+```
+
+### Set 4
+
+```
+[
+    {
+        cityCost: false,
+        startDate: 9/1/15,
+        endDate: 9/1/15
+    },
+    {
+        cityCost: false,
+        startDate: 9/1/15,
+        endDate: 9/1/15
+    },
+    {
+        cityCost: true,
+        startDate: 9/2/15,
+        endDate: 9/2/15
+    },
+    {
+        cityCost: true,
+        startDate: 9/2/15,
+        endDate: 9/3/15
+    }
+]
+```
