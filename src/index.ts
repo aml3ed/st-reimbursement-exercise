@@ -6,7 +6,7 @@ type Project = {
   /**
    * Whether the city is high (true) or low (false) cost
    */
-  cityCost: boolean;
+  highCost: boolean;
   /**
    * Date the project begins in month/day/year format
    */
