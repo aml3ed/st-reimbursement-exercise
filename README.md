@@ -42,6 +42,8 @@ Set: Projects[]
 
 ### Set 1
 
+Should calculate to **165**
+
 ```
 [
     {
@@ -53,6 +55,8 @@ Set: Projects[]
 ```
 
 ### Set 2
+
+Should calculate to **620**
 
 ```
 [
@@ -76,6 +80,8 @@ Set: Projects[]
 
 ### Set 3
 
+Should calculate to **475**
+
 ```
 [
     {
@@ -97,6 +103,8 @@ Set: Projects[]
 ```
 
 ### Set 4
+
+Should calculate to **215**
 
 ```
 [
