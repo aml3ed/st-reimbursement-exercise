@@ -19,10 +19,10 @@ Given a set of _projects_, calculate the reimbursement amount for the _set_.
 
 ## Rates
 
-| day type | high cost city | low cost city |
-| -------- | -------------: | ------------: |
-| full     |      $85 / day |     $75 / day |
-| travel   |      $55 / day |     $45 / day |
+|           |      full |    travel |
+| --------- | --------: | --------: |
+| high cost | $85 / day | $55 / day |
+| low cost  | $75 / day | $45 / day |
 
 ## Type definitions
 
