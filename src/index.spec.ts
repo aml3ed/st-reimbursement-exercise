@@ -22,5 +22,11 @@ describe("Project class tests", () => {
     expect(new Project(set1[0]).middleDays).toStrictEqual([
       "Wed, 02 Sep 2015 04:00:00 GMT"
     ]);
+    expect(new Project(set2[0]).middleDays).toStrictEqual([]);
+    expect(new Project(set2[1]).middleDays).toStrictEqual([
+      "Sat, 05 Sep 2015 04:00:00 GMT",
+      "Fri, 04 Sep 2015 04:00:00 GMT",
+      "Thu, 03 Sep 2015 04:00:00 GMT"
+    ]);
   });
 });
