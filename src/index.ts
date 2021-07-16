@@ -17,11 +17,15 @@ export function calcReimbursment(projects: ProjectData[]): number {
     const proj = new Project(project);
     // Add day to high or low cost arrays depending on city of project
     if (proj.highCost) {
-      pushNoDups(highCostTravel, proj.startDate, proj.endDate);
-      pushNoDups(highCostFull, ...proj.middleDays);
+      highCostTravel.push(proj.startDate, proj.endDate);
+      highCostFull.push(...proj.middleDays);
+      // pushNoDups(highCostTravel, proj.startDate, proj.endDate);
+      // pushNoDups(highCostFull, ...proj.middleDays);
     } else {
-      pushNoDups(lowCostTravel, proj.startDate, proj.endDate);
-      pushNoDups(lowCostFull, ...proj.middleDays);
+      lowCostTravel.push(proj.startDate, proj.endDate);
+      lowCostFull.push(...proj.middleDays);
+      // pushNoDups(lowCostTravel, proj.startDate, proj.endDate);
+      // pushNoDups(lowCostFull, ...proj.middleDays);
     }
     // Add days to allDaysWorked
     pushNoDups(allDaysWorked, proj.startDate, proj.endDate, ...proj.middleDays);
