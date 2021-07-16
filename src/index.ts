@@ -31,6 +31,11 @@ export function calcReimbursment(projects: ProjectData[]): number {
     pushNoDups(allDaysWorked, proj.startDate, proj.endDate, ...proj.middleDays);
   });
 
+  // Setup counts for final tallying
+  let highCostFullDays = 0,
+    lowCostFullDays = 0,
+    highCostTravelDays = 0,
+    lowCostTravelDays = 0;
   // Go back through and compare each array for overlaps in projects, take the higher cost full-day rate
   allDaysWorked.forEach((day) => {
     // each of these variables will be used to store bool and count value
@@ -38,6 +43,25 @@ export function calcReimbursment(projects: ProjectData[]): number {
     const isHighCostTravelDay = countOf(highCostTravel, day);
     const isLowCostFullDay = countOf(lowCostFull, day);
     const isHighCostFullDay = countOf(highCostFull, day);
+    // Based on counts, we can tell if there are overlaps
+    const hasOverlaps =
+      isLowCostTravelDay +
+      isHighCostTravelDay +
+      isLowCostFullDay +
+      isHighCostFullDay;
+
+    // We can now count this day based on what yields the highest rate
+    if (isHighCostFullDay || (isHighCostTravelDay && hasOverlaps > 1)) {
+      // just count as high-cost full day
+      highCostFullDays += 1;
+    } else if (isLowCostFullDay || (isLowCostTravelDay && hasOverlaps > 1)) {
+      // just count as low-cost full-day
+      lowCostFullDays += 1;
+    } else if (isHighCostTravelDay) {
+      highCostTravelDays += 1;
+    } else {
+      lowCostTravelDays += 1;
+    }
   });
   // Print Values for debugging
   console.log("------ High Cost Travel ------");
@@ -50,10 +74,10 @@ export function calcReimbursment(projects: ProjectData[]): number {
   console.table(lowCostFull);
   // Calculate cost based on reimbursement amount for each day
   return (
-    highCostTravel.length * highCostTravelRate +
-    highCostFull.length * highCostFullRate +
-    lowCostTravel.length * lowCostTravelRate +
-    lowCostFull.length * lowCostFullRate
+    highCostTravelDays * highCostTravelRate +
+    highCostFullDays * highCostFullRate +
+    lowCostTravelDays * lowCostTravelRate +
+    lowCostFullDays * lowCostFullRate
   );
 }
 
