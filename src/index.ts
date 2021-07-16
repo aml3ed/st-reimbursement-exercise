@@ -26,7 +26,35 @@ export function calcReimbursment(projects: ProjectData[]): number {
     // Add days to allDaysWorked
     pushNoDups(allDaysWorked, proj.startDate, proj.endDate, ...proj.middleDays);
   });
+
   // Go back through and compare each array for overlaps in projects, take the higher cost full-day rate
+  allDaysWorked.forEach((day) => {
+    let isLowCostTravelDay = false;
+    let isHighCostTravelDay = false;
+    let isLowCostFullDay = false;
+    let isHighCostFullDay = false;
+    if (lowCostTravel.includes(day)) {
+      isLowCostTravelDay = true;
+    }
+    if (highCostTravel.includes(day)) {
+      isHighCostTravelDay = true;
+    }
+    if (highCostFull.includes(day)) {
+      isHighCostFullDay = true;
+    }
+    if (lowCostFull.includes(day)) {
+      isLowCostFullDay = true;
+    }
+  });
+  // Print Values for debugging
+  console.log("------ High Cost Travel ------");
+  console.table(highCostTravel);
+  console.log("------ Low Cost Travel ------");
+  console.table(lowCostTravel);
+  console.log("------ High Cost Full ------");
+  console.table(highCostFull);
+  console.log("------ Low Cost Full ------");
+  console.table(lowCostFull);
   // Calculate cost based on reimbursement amount for each day
   return (
     highCostTravel.length * highCostTravelRate +
@@ -37,10 +65,18 @@ export function calcReimbursment(projects: ProjectData[]): number {
 }
 
 // Helper function to only add to array if not currently included
-function pushNoDups(array, ...items: string[]): void {
+function pushNoDups(array: any[], ...items: string[]): void {
   items.forEach((item) => {
     if (!array.includes(item)) {
       array.push(item);
     }
   });
+}
+
+// Helper function to remove item from array
+function removeFrom(array: any[], item: any): void {
+  const index = array.indexOf(item);
+  if (index > -1) {
+    array.splice(index, 1);
+  }
 }
