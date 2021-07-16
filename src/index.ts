@@ -1,18 +1,14 @@
-export function calcReimbursment(set: Project[]): number {
+import { Project, ProjectData } from "./Project";
+
+export function calcReimbursment(projects: ProjectData[]): number {
+  // Initialize arrays to keep track of "seen" days in set
+  const highCostTravel = [];
+  const lowCostTravel = [];
+  const highCostFull = [];
+  const lowCostFull = [];
+  // Loop through set
+  projects.forEach((project) => {
+    const proj = new Project(project);
+  });
   return 0;
 }
-
-type Project = {
-  /**
-   * Whether the city is high (true) or low (false) cost
-   */
-  highCost: boolean;
-  /**
-   * Date the project begins in month/day/year format
-   */
-  startDate: string;
-  /**
-   * Date the project end in month/day/year format
-   */
-  endDate: string;
-};

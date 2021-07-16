@@ -27,15 +27,11 @@ Given a set of _projects_, calculate the reimbursement amount for the _set_.
 ## Type definitions
 
 ```
-Project: {
+ProjectData: {
     cityCost: bool (true is high cost | false is low cost);
     startDate: string (in month/day/year format);
     endDate: string (in month/day/year format);
 }
-```
-
-```
-Set: Projects[]
 ```
 
 ## Sets
