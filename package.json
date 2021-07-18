@@ -29,7 +29,6 @@
     "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix",
     "test": "jest",
     "build": "npx tsc -t es5 --outDir build src/main.ts",
-    "calc": "node build/src/main.js",
-    "calc-b": "npm run build && node build/src/main.js"
+    "calc": "npm run build && node build/src/main.js"
   }
 }

@@ -1,6 +1,6 @@
 # Simple Thread Technical Exercise
 
-This repository is a container for the technical exercise given to me for my job application to Simple Thread. It is written in Javascript and test with Jest.
+This repository is a container for the technical exercise given to me for my job application to Simple Thread. It is written in Typescript and tested with Jest.
 
 ## Goal
 
@@ -24,6 +24,40 @@ Given a set of _projects_, calculate the reimbursement amount for the _set_.
 | high cost | $85 / day | $55 / day |
 | low cost  | $75 / day | $45 / day |
 
+# Running the code
+
+To run the project and calculate reimbursement for the 4 given sets in the `/data` folder, first install the necessary dependencies.
+
+```
+npm install
+```
+
+**_Note_**: If you get an error that dependencies couldn't be installed correctly, make sure the version of Node you're running is `v14.16.0` or later. You can do this easily if you have `nvm` installed by running `nvm i`.
+
+### Run using Jest
+
+If you'd like to just run the tests in the test-file using Jest, you can run:
+
+```
+npm run test
+```
+
+or
+
+```
+jest
+```
+
+### Run using build script
+
+If you'd like to just see a printout of the results from testing the given data-sets, I created a build script that does just that. You can run it with the following command:
+
+```
+npm run calc
+```
+
+# Related Info
+
 ## Type definitions
 
 ```
@@ -34,7 +68,7 @@ ProjectData: {
 }
 ```
 
-## Sets
+## Testing Sets
 
 ### Set 1
 
