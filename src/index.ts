@@ -67,16 +67,6 @@ export function calcReimbursment(projects: ProjectData[]): number {
     // Add day to counted array
     countedDays.push(day);
   });
-  // Print Values for debugging
-  // console.log("-----------------------------");
-  // console.log("------ High Cost Travel ------");
-  // console.table(highCostTravel);
-  // console.log("------ Low Cost Travel ------");
-  // console.table(lowCostTravel);
-  // console.log("------ High Cost Full ------");
-  // console.table(highCostFull);
-  // console.log("------ Low Cost Full ------");
-  // console.table(lowCostFull);
   // Calculate cost based on reimbursement amount for each day
   return (
     highCostTravelDays * highCostTravelRate +
