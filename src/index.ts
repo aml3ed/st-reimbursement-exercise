@@ -50,7 +50,7 @@ export function calcReimbursment(projects: ProjectData[]): number {
     console.log("lcf", isLowCostFullDay);
     console.log("hcf", isHighCostFullDay);
     // See if this day bumps up against another project day
-    const hasNeighbor = day.hasNeighborDayIn(allDaysWorked);
+    const hasNeighbor = day.adjacentToOtherProject(allDaysWorked);
     // Based on counts, we can tell if there are overlaps or conditions to turn travel days into full days
     const hasOverlaps =
       isLowCostTravelDay +

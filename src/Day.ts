@@ -1,10 +1,12 @@
 export class Day {
   date: number;
   projectKey: number;
+  isStartOrEnd: boolean;
 
-  constructor(utcString: string, setIndex: number) {
+  constructor(utcString: string, setIndex: number, isStartOrEnd?: boolean) {
     this.date = new Date(utcString).getTime();
     this.projectKey = setIndex;
+    this.isStartOrEnd = isStartOrEnd || false;
   }
 
   get nextDayTime(): number {
@@ -29,11 +31,13 @@ export class Day {
   countOfIn(array: Day[]): number {
     return array.filter((x) => x.date === this.date).length;
   }
-  hasNeighborDayIn(array: Day[]): number {
-    return array.filter(
-      (x) =>
-        (x.date === this.prevDayTime || x.date === this.nextDayTime) &&
-        x.projectKey !== this.projectKey
-    ).length;
+  adjacentToOtherProject(array: Day[]): number {
+    return this.isStartOrEnd
+      ? array.filter(
+          (x) =>
+            (x.date === this.prevDayTime || x.date === this.nextDayTime) &&
+            x.projectKey !== this.projectKey
+        ).length
+      : 0;
   }
 }
