@@ -1,3 +1,4 @@
+import { Day } from "./Day";
 import { Project, ProjectData } from "./Project";
 
 const highCostTravelRate = 55;
@@ -7,14 +8,14 @@ const lowCostFullRate = 75;
 
 export function calcReimbursment(projects: ProjectData[]): number {
   // Initialize arrays to keep track of "seen" days in set
-  const allDaysWorked = [];
-  const highCostTravel = [];
-  const lowCostTravel = [];
-  const highCostFull = [];
-  const lowCostFull = [];
+  const allDaysWorked = [] as Day[];
+  const highCostTravel = [] as Day[];
+  const lowCostTravel = [] as Day[];
+  const highCostFull = [] as Day[];
+  const lowCostFull = [] as Day[];
   // Loop through set and add days to each array
-  projects.forEach((project) => {
-    const proj = new Project(project);
+  projects.forEach((project, projectIndex) => {
+    const proj = new Project(project, projectIndex);
     // Add day to high or low cost arrays depending on city of project
     if (proj.highCost) {
       highCostTravel.push(proj.startDate, proj.endDate);
@@ -39,10 +40,10 @@ export function calcReimbursment(projects: ProjectData[]): number {
   // Go back through and compare each array for overlaps in projects
   allDaysWorked.forEach((day) => {
     // each of these variables will be used to store bool and count value
-    const isLowCostTravelDay = countOf(lowCostTravel, day);
-    const isHighCostTravelDay = countOf(highCostTravel, day);
-    const isLowCostFullDay = countOf(lowCostFull, day);
-    const isHighCostFullDay = countOf(highCostFull, day);
+    const isLowCostTravelDay = day.countOfIn(lowCostTravel);
+    const isHighCostTravelDay = day.countOfIn(highCostTravel);
+    const isLowCostFullDay = day.countOfIn(lowCostFull);
+    const isHighCostFullDay = day.countOfIn(highCostTravel);
     // Based on counts, we can tell if there are overlaps
     const hasOverlaps =
       isLowCostTravelDay +
@@ -82,7 +83,7 @@ export function calcReimbursment(projects: ProjectData[]): number {
 }
 
 // Helper function to only add to array if not currently included
-function pushNoDups(array: any[], ...items: string[]): void {
+function pushNoDups(array: any[], ...items: any[]): void {
   items.forEach((item) => {
     if (!array.includes(item)) {
       array.push(item);
@@ -99,6 +100,6 @@ function removeFrom(array: any[], item: any): void {
 }
 
 // Helper function to count items in array
-export function countOf(array: any[], item: any): number {
-  return array.filter((x) => x === item).length;
-}
+// function countOf(array: any[], item: any): number {
+//   return array.filter((x) => x === item).length;
+// }

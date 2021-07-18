@@ -17,9 +17,12 @@ export class Day {
     return this.date - 1000 * 3600 * 24;
   }
 
-  isEqual(otherDay: Day): boolean {
+  isEqual(otherDay: { date: number; projectKey: number }): boolean {
     if (otherDay.date === this.date && otherDay.projectKey === this.projectKey)
       return true;
     return false;
+  }
+  countOfIn(array: Day[]): number {
+    return array.filter((x) => x.isEqual(this)).length;
   }
 }
