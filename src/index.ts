@@ -65,14 +65,14 @@ export function calcReimbursment(projects: ProjectData[]): number {
     }
   });
   // Print Values for debugging
-  console.log("------ High Cost Travel ------");
-  console.table(highCostTravel);
-  console.log("------ Low Cost Travel ------");
-  console.table(lowCostTravel);
-  console.log("------ High Cost Full ------");
-  console.table(highCostFull);
-  console.log("------ Low Cost Full ------");
-  console.table(lowCostFull);
+  // console.log("------ High Cost Travel ------");
+  // console.table(highCostTravel);
+  // console.log("------ Low Cost Travel ------");
+  // console.table(lowCostTravel);
+  // console.log("------ High Cost Full ------");
+  // console.table(highCostFull);
+  // console.log("------ Low Cost Full ------");
+  // console.table(lowCostFull);
   // Calculate cost based on reimbursement amount for each day
   return (
     highCostTravelDays * highCostTravelRate +
@@ -90,16 +90,3 @@ function pushNoDups(array: any[], ...items: any[]): void {
     }
   });
 }
-
-// Helper function to remove item from array
-function removeFrom(array: any[], item: any): void {
-  const index = array.indexOf(item);
-  if (index > -1) {
-    array.splice(index, 1);
-  }
-}
-
-// Helper function to count items in array
-// function countOf(array: any[], item: any): number {
-//   return array.filter((x) => x === item).length;
-// }
