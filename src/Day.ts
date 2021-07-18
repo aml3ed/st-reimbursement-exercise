@@ -17,6 +17,10 @@ export class Day {
     return this.date - 1000 * 3600 * 24;
   }
 
+  get asUTCString(): string {
+    return new Date(this.date).toUTCString();
+  }
+
   isEqual(otherDay: { date: number; projectKey: number }): boolean {
     if (otherDay.date === this.date && otherDay.projectKey === this.projectKey)
       return true;

@@ -37,8 +37,11 @@ export function calcReimbursment(projects: ProjectData[]): number {
     lowCostFullDays = 0,
     highCostTravelDays = 0,
     lowCostTravelDays = 0;
+  const countedDays = [] as Day[];
   // Go back through and compare each array for overlaps in projects
   allDaysWorked.forEach((day) => {
+    // If we've already counted this day, don't count it twice
+    if (day.countOfIn(countedDays) > 0) return;
     // each of these variables will be used to store bool and count value
     const isLowCostTravelDay = day.countOfIn(lowCostTravel);
     const isHighCostTravelDay = day.countOfIn(highCostTravel);
@@ -50,7 +53,7 @@ export function calcReimbursment(projects: ProjectData[]): number {
       isHighCostTravelDay +
       isLowCostFullDay +
       isHighCostFullDay;
-
+    console.log(day.asUTCString, hasOverlaps > 1);
     // We can now count this day based on what yields the highest rate
     if (isHighCostFullDay || (isHighCostTravelDay && hasOverlaps > 1)) {
       // just count as high-cost full day
@@ -63,8 +66,11 @@ export function calcReimbursment(projects: ProjectData[]): number {
     } else {
       lowCostTravelDays += 1;
     }
+    // Add day to counted array
+    countedDays.push(day);
   });
   // Print Values for debugging
+  // console.log("-----------------------------");
   // console.log("------ High Cost Travel ------");
   // console.table(highCostTravel);
   // console.log("------ Low Cost Travel ------");
@@ -73,6 +79,7 @@ export function calcReimbursment(projects: ProjectData[]): number {
   // console.table(highCostFull);
   // console.log("------ Low Cost Full ------");
   // console.table(lowCostFull);
+  console.log(highCostTravelDays);
   // Calculate cost based on reimbursement amount for each day
   return (
     highCostTravelDays * highCostTravelRate +
