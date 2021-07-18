@@ -20,13 +20,9 @@ export function calcReimbursment(projects: ProjectData[]): number {
     if (proj.highCost) {
       highCostTravel.push(proj.startDate, proj.endDate);
       highCostFull.push(...proj.middleDays);
-      // pushNoDups(highCostTravel, proj.startDate, proj.endDate);
-      // pushNoDups(highCostFull, ...proj.middleDays);
     } else {
       lowCostTravel.push(proj.startDate, proj.endDate);
       lowCostFull.push(...proj.middleDays);
-      // pushNoDups(lowCostTravel, proj.startDate, proj.endDate);
-      // pushNoDups(lowCostFull, ...proj.middleDays);
     }
     // Add days to allDaysWorked
     pushNoDups(allDaysWorked, proj.startDate, proj.endDate, ...proj.middleDays);
@@ -39,21 +35,30 @@ export function calcReimbursment(projects: ProjectData[]): number {
     lowCostTravelDays = 0;
   const countedDays = [] as Day[];
   // Go back through and compare each array for overlaps in projects
+  console.log(allDaysWorked);
   allDaysWorked.forEach((day) => {
     // If we've already counted this day, don't count it twice
     if (day.countOfIn(countedDays) > 0) return;
+    console.log("------------------", day.asUTCString);
     // each of these variables will be used to store bool and count value
     const isLowCostTravelDay = day.countOfIn(lowCostTravel);
     const isHighCostTravelDay = day.countOfIn(highCostTravel);
     const isLowCostFullDay = day.countOfIn(lowCostFull);
     const isHighCostFullDay = day.countOfIn(highCostTravel);
-    // Based on counts, we can tell if there are overlaps
+    console.log("lct", isLowCostTravelDay);
+    console.log("hct", isHighCostTravelDay);
+    console.log("lcf", isLowCostFullDay);
+    console.log("hcf", isHighCostFullDay);
+    // See if this day bumps up against another project day
+    const hasNeighbor = day.hasNeighborDayIn(allDaysWorked);
+    // Based on counts, we can tell if there are overlaps or conditions to turn travel days into full days
     const hasOverlaps =
       isLowCostTravelDay +
       isHighCostTravelDay +
       isLowCostFullDay +
-      isHighCostFullDay;
-    console.log(day.asUTCString, hasOverlaps > 1);
+      isHighCostFullDay +
+      hasNeighbor;
+    console.log("Overlaps or Neighbors", hasOverlaps, hasNeighbor);
     // We can now count this day based on what yields the highest rate
     if (isHighCostFullDay || (isHighCostTravelDay && hasOverlaps > 1)) {
       // just count as high-cost full day
@@ -79,7 +84,6 @@ export function calcReimbursment(projects: ProjectData[]): number {
   // console.table(highCostFull);
   // console.log("------ Low Cost Full ------");
   // console.table(lowCostFull);
-  console.log(highCostTravelDays);
   // Calculate cost based on reimbursement amount for each day
   return (
     highCostTravelDays * highCostTravelRate +
@@ -89,11 +93,8 @@ export function calcReimbursment(projects: ProjectData[]): number {
   );
 }
 
-// Helper function to only add to array if not currently included
-function pushNoDups(array: any[], ...items: any[]): void {
-  items.forEach((item) => {
-    if (!array.includes(item)) {
-      array.push(item);
-    }
+function pushNoDups(array: Day[], ...items: Day[]): void {
+  items.forEach((day) => {
+    if (array.filter((x) => x.isEqual(day)).length === 0) array.push(day);
   });
 }

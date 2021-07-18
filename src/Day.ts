@@ -7,12 +7,12 @@ export class Day {
     this.projectKey = setIndex;
   }
 
-  nextDayTime(): number {
+  get nextDayTime(): number {
     if (!this.date) throw Error("Date variable not constructed yet");
     return this.date + 1000 * 3600 * 24;
   }
 
-  prevDayTime(): number {
+  get prevDayTime(): number {
     if (!this.date) throw Error("Date variable not constructed yet");
     return this.date - 1000 * 3600 * 24;
   }
@@ -27,6 +27,13 @@ export class Day {
     return false;
   }
   countOfIn(array: Day[]): number {
-    return array.filter((x) => x.isEqual(this)).length;
+    return array.filter((x) => x.date === this.date).length;
+  }
+  hasNeighborDayIn(array: Day[]): number {
+    return array.filter(
+      (x) =>
+        (x.date === this.prevDayTime || x.date === this.nextDayTime) &&
+        x.projectKey !== this.projectKey
+    ).length;
   }
 }

@@ -29,6 +29,7 @@ describe("Project class tests", () => {
       new Day("Fri, 04 Sep 2015 04:00:00 GMT", 1),
       new Day("Thu, 03 Sep 2015 04:00:00 GMT", 1)
     ]);
+    expect(new Project(set4[3], 1).middleDays).toStrictEqual([]);
   });
 });
 
@@ -47,5 +48,14 @@ describe("Day class tests", () => {
         projectKey: 0
       })
     ).toBeFalsy();
+  });
+  it("should calculate whether it has neighbors correctly", () => {
+    expect(
+      new Day("Wed, 02 Sep 2015 04:00:00 GMT", 0).hasNeighborDayIn([
+        new Day("Thu, 03 Sep 2015 04:00:00 GMT", 1),
+        new Day("Wed, 02 Sep 2015 04:00:00 GMT", 1),
+        new Day("Tue, 01 Sep 2015 04:00:00 GMT", 0)
+      ])
+    ).toEqual(1);
   });
 });

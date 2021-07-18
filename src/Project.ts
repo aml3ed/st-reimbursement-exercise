@@ -28,12 +28,10 @@ export class Project {
     let dayCursor = new Date(endDay);
     this.middleDays = [];
     // Loop back from end date until start date and log the "middle" days in an array
-    while (dayCursor > startDay) {
-      const prevDay = new Date(
-        dayCursor.getTime() - 1000 * 3600 * 24
-      ).toUTCString();
-      if (prevDay !== startDay.toUTCString()) {
-        this.middleDays.push(new Day(prevDay, projectIndex));
+    while (dayCursor.getTime() > startDay.getTime()) {
+      const prevDay = new Date(dayCursor.getTime() - 1000 * 3600 * 24);
+      if (prevDay.getTime() !== startDay.getTime()) {
+        this.middleDays.push(new Day(prevDay.toUTCString(), projectIndex));
       }
       dayCursor = new Date(prevDay);
     }
