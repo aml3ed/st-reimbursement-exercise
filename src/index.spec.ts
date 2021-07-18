@@ -51,15 +51,13 @@ describe("Day class tests", () => {
   });
   it("should calculate whether it has neighbors correctly", () => {
     expect(
-      new Day(
-        "Wed, 02 Sep 2015 04:00:00 GMT",
-        0,
-        "start"
-      ).adjacentToOtherProject([
-        new Day("Thu, 03 Sep 2015 04:00:00 GMT", 1),
-        new Day("Wed, 02 Sep 2015 04:00:00 GMT", 1),
-        new Day("Tue, 01 Sep 2015 04:00:00 GMT", 0)
-      ])
+      new Day("Wed, 02 Sep 2015 04:00:00 GMT", 0, "end").adjacentToOtherProject(
+        [
+          new Day("Thu, 03 Sep 2015 04:00:00 GMT", 1),
+          new Day("Wed, 02 Sep 2015 04:00:00 GMT", 1),
+          new Day("Tue, 01 Sep 2015 04:00:00 GMT", 0)
+        ]
+      )
     ).toEqual(1);
   });
 });
