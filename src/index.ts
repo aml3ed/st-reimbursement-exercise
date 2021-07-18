@@ -36,7 +36,7 @@ export function calcReimbursment(projects: ProjectData[]): number {
     lowCostFullDays = 0,
     highCostTravelDays = 0,
     lowCostTravelDays = 0;
-  // Go back through and compare each array for overlaps in projects, take the higher cost full-day rate
+  // Go back through and compare each array for overlaps in projects
   allDaysWorked.forEach((day) => {
     // each of these variables will be used to store bool and count value
     const isLowCostTravelDay = countOf(lowCostTravel, day);
@@ -99,6 +99,6 @@ function removeFrom(array: any[], item: any): void {
 }
 
 // Helper function to count items in array
-function countOf(array: any[], item: any): number {
+export function countOf(array: any[], item: any): number {
   return array.filter((x) => x === item).length;
 }
