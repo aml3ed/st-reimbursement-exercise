@@ -1,12 +1,12 @@
 export class Day {
   date: number;
   projectKey: number;
-  isStartOrEnd: boolean;
+  type: DayType;
 
-  constructor(utcString: string, setIndex: number, isStartOrEnd?: boolean) {
+  constructor(utcString: string, setIndex: number, type?: DayType) {
     this.date = new Date(utcString).getTime();
     this.projectKey = setIndex;
-    this.isStartOrEnd = isStartOrEnd || false;
+    this.type = type || "middle";
   }
 
   get nextDayTime(): number {
@@ -32,12 +32,17 @@ export class Day {
     return array.filter((x) => x.date === this.date).length;
   }
   adjacentToOtherProject(array: Day[]): number {
-    return this.isStartOrEnd
-      ? array.filter(
-          (x) =>
-            (x.date === this.prevDayTime || x.date === this.nextDayTime) &&
-            x.projectKey !== this.projectKey
-        ).length
-      : 0;
+    if (this.type === "end") {
+      return array.filter(
+        (x) => x.date === this.nextDayTime && x.projectKey !== this.projectKey
+      ).length;
+    } else if (this.type === "start") {
+      return array.filter(
+        (x) => x.date === this.prevDayTime && x.projectKey !== this.projectKey
+      ).length;
+    } else {
+      return 0;
+    }
   }
 }
+type DayType = "start" | "end" | "middle";

@@ -44,7 +44,7 @@ export function calcReimbursment(projects: ProjectData[]): number {
     const isLowCostTravelDay = day.countOfIn(lowCostTravel);
     const isHighCostTravelDay = day.countOfIn(highCostTravel);
     const isLowCostFullDay = day.countOfIn(lowCostFull);
-    const isHighCostFullDay = day.countOfIn(highCostTravel);
+    const isHighCostFullDay = day.countOfIn(highCostFull);
     console.log("lct", isLowCostTravelDay);
     console.log("hct", isHighCostTravelDay);
     console.log("lcf", isLowCostFullDay);

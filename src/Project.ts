@@ -23,8 +23,8 @@ export class Project {
     // Setup start, end, and middle days
     const startDay = new Date(projectData.startDate);
     const endDay = new Date(projectData.endDate);
-    this.startDate = new Day(startDay.toUTCString(), projectIndex, true);
-    this.endDate = new Day(endDay.toUTCString(), projectIndex, true);
+    this.startDate = new Day(startDay.toUTCString(), projectIndex, "start");
+    this.endDate = new Day(endDay.toUTCString(), projectIndex, "end");
     let dayCursor = new Date(endDay);
     this.middleDays = [];
     // Loop back from end date until start date and log the "middle" days in an array
